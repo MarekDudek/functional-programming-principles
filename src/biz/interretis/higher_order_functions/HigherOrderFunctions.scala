@@ -33,4 +33,16 @@ object HigherOrderFunctions extends App {
     else
       f(a) + sumF2(f)(a + 1, b)
   }
+
+  def product(f: Int => Int)(a: Int, b: Int): Int = {
+    if (a > b)
+      1
+    else
+      f(a) * product(f)(a + 1, b)
+  }
+
+  def id(a: Int) = a
+
+  def factorial(n: Int) =
+    product(id)(1, n)
 }
