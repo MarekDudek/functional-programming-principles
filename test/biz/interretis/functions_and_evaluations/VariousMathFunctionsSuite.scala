@@ -20,4 +20,8 @@ class VariousMathFunctionsSuite extends FunSuite {
   test("5! is 120 with tail recursion") {
     assert(tailFactorial(5) === 120)
   }
+
+  test("cube") {
+    assert(cube(5) === 125)
+  }
 }

@@ -2,7 +2,7 @@ package biz.interretis.functions_and_evaluations
 
 import scala.annotation.tailrec
 
-object VariousMathFunctions {
+object VariousMathFunctions extends App {
 
   @tailrec
   def gcd(a: Int, b: Int): Int =
@@ -20,4 +20,6 @@ object VariousMathFunctions {
 
     tailFactorial(n, 1)
   }
+
+  def cube = (x: Int) => x * x * x
 }
