@@ -11,14 +11,36 @@ class HigherOrderFunctionsSuite extends FunSuite {
   import biz.interretis.functions_and_evaluations.VariousMathFunctions.{ tailFactorial => factorial }
 
   test("sum of 1..10") {
-    assert(sum(x => x, 1, 10) == 55)
+    assert(sum(x => x)(1, 10) === 55)
   }
 
   test("sum of squares of 1..10") {
-    assert(sum(x => x * x, 1, 10) == 385)
+    assert(sum(x => x * x)(1, 10) === 385)
   }
 
   test("sum of factorials of 1..10") {
-    assert(sum(x => factorial(x), 1, 10) == 4037913)
+    assert(sum(x => factorial(x))(1, 10) === 4037913)
+  }
+
+  def sumInts = sumF(x => x)
+  def sumSquares = sumF(x => x * x)
+  def sumFactorials = sumF(factorial)
+
+  test("curried sum of 1..10") {
+    assert(sumInts(1, 10) === 55)
+  }
+
+  test("curried sum of squares of 1..10") {
+    assert(sumSquares(1, 10) === 385)
+  }
+
+  test("curried sum of factorials of 1..10") {
+    assert(sumFactorials(1, 10) === 4037913)
+  }
+
+  val cube = (x: Int) => x * x * x
+
+  test("direct invocation of curried function") {
+    assert(sumF(cube)(1, 10) === 3025)
   }
 }
