@@ -45,4 +45,13 @@ object HigherOrderFunctions extends App {
 
   def factorial(n: Int) =
     product(id)(1, n)
+
+  def mapReduce(f: Int => Int, combine: (Int, Int) => Int, zero: Int)(a: Int, b: Int): Int =
+    if (a > b)
+      zero
+    else
+      combine(f(a), mapReduce(f, combine, zero)(a + 1, b))
+
+  def productAsMapReduce(f: Int => Int)(a: Int, b: Int): Int =
+    mapReduce(id, (a: Int, b: Int) => a * b, 1)(a, b)
 }

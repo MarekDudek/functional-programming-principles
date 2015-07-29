@@ -47,4 +47,12 @@ class HigherOrderFunctionsSuite extends FunSuite {
   test("factorial as product") {
     assert(factorial(5) === 120)
   }
+
+  test("factorial with map-reduce") {
+    assert(mapReduce(id, (a: Int, b: Int) => a * b, 1)(1, 5) === 120)
+  }
+
+  test("product as map-reduce") {
+    assert(productAsMapReduce(id)(1, 5) === 120)
+  }
 }
