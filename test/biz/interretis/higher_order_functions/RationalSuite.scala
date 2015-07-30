@@ -20,22 +20,22 @@ class RationalSuite extends FunSuite {
   }
 
   test("addition") {
-    val sum = rational add that
+    val sum = rational + that
     assert(sum.toString === "7/6")
   }
 
   test("subtraction") {
-    val difference = rational sub that
+    val difference = rational - that
     assert(difference.toString === "-1/6")
   }
 
   test("negation") {
-    val negative = rational.neg
+    val negative = -rational
     assert(negative.toString === "-1/2")
   }
 
   test("multiplication") {
-    val product = rational mul that
+    val product = rational * that
     assert(product.toString === "1/3")
   }
 
@@ -44,17 +44,17 @@ class RationalSuite extends FunSuite {
   val z = new Rational(3, 2)
 
   test("expression") {
-    val result = x add y mul z
+    val result = (x + y) * z
     assert(result.toString === "11/7")
   }
 
   test("2/3 < 5/7") {
-    val result = that less y
+    val result = that < y
     assert(result === true)
   }
 
   test("max 2/3 5/7") {
-    val maximum = that.max(y)
+    val maximum = that max y
     assert(maximum === y)
   }
 

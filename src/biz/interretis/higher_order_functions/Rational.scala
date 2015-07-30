@@ -20,29 +20,29 @@ class Rational(x: Int, y: Int) {
   def numer = x / abs(gcd(x, y))
   def denom = y / abs(gcd(x, y))
 
-  def add(that: Rational) = {
+  def +(that: Rational) = {
     val nominator = numer * that.denom + denom * that.numer
     val denominator = denom * that.denom
     new Rational(nominator, denominator)
   }
 
-  def mul(that: Rational) = {
+  def *(that: Rational) = {
     val nominator = numer * that.numer
     val denominator = denom * that.denom
     new Rational(nominator, denominator)
   }
 
-  def neg =
+  def unary_- =
     new Rational(-numer, denom)
 
-  def sub(that: Rational) =
-    add(that.neg)
+  def -(that: Rational) =
+    this + -that
 
-  def less(that: Rational) =
+  def <(that: Rational) =
     this.numer * that.denom < that.numer * this.denom
 
   def max(that: Rational) =
-    if (this less that)
+    if (this < that)
       that
     else
       this
