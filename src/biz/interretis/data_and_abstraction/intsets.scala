@@ -7,6 +7,8 @@ abstract class IntSet {
   def contains(x: Int): Boolean
 
   def makeString: String
+
+  def union(other: IntSet): IntSet
 }
 
 object Empty extends IntSet {
@@ -16,6 +18,9 @@ object Empty extends IntSet {
 
   def contains(elem: Int): Boolean =
     false
+
+  def union(other: IntSet) =
+    other
 
   override def makeString = "{}"
 }
@@ -38,19 +43,22 @@ class NonEmpty(root: Int, left: IntSet, right: IntSet) extends IntSet {
     else
       right contains elem
 
+  def union(other: IntSet) =
+    left union right union other incl root
+
   override def toString = {
     val builder = new StringBuilder
     if (left != Empty)
       builder append left append ", "
     builder append root
     if (right != Empty)
-      builder append right append ", "
-    builder toString
+      builder append ", " append right
+    builder.toString
   }
 
   override def makeString = {
     val builder = new StringBuilder
-    builder append '{' append this append '}'
-    builder toString
+    builder append '{'  append this append '}'
+    builder.toString
   }
 }
