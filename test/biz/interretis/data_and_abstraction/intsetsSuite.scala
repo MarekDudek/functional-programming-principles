@@ -13,7 +13,7 @@ class intsetsSuite extends FunSuite {
 
   val one = Empty incl 1 incl 3 incl 5 incl 7 incl 9
   val two = Empty incl 2 incl 4 incl 6 incl 8 incl 10
-  
+
   val sum = Empty incl 1 incl 2 incl 3 incl 4 incl 5 incl 6 incl 7 incl 8 incl 9 incl 10
 
   test("empty does not contain anything") {

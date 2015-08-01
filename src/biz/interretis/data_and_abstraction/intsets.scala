@@ -1,5 +1,7 @@
 package biz.interretis.data_and_abstraction
 
+import scala.language.postfixOps
+
 abstract class IntSet {
 
   def incl(x: Int): IntSet
@@ -53,12 +55,12 @@ class NonEmpty(root: Int, left: IntSet, right: IntSet) extends IntSet {
     builder append root
     if (right != Empty)
       builder append ", " append right
-    builder.toString
+    builder toString
   }
 
   override def makeString = {
     val builder = new StringBuilder
-    builder append '{'  append this append '}'
-    builder.toString
+    builder append '{' append this append '}'
+    builder toString
   }
 }
