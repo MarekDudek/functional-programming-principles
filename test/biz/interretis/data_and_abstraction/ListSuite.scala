@@ -10,17 +10,16 @@ import scala.language.postfixOps
 class ListSuite extends FunSuite {
 
   val empty = new Nil[Int]
-  val singletonList = new Cons(1, empty)
+  val singletonList = List.singleton(1) 
   val list = new Cons(1, new Cons(2, new Cons(3, new Nil)))
 
   test("list can be checked for empty") {
     assert(empty isEmpty)
     assert(!(singletonList isEmpty))
     assert(!(list isEmpty))
-    assert(!(list.tail isEmpty))
   }
 
-  intercept[RuntimeException] {
+  intercept[NoSuchElementException] {
     empty.head
   }
 
@@ -28,7 +27,7 @@ class ListSuite extends FunSuite {
     assert(list.head === 1)
   }
 
-  intercept[RuntimeException] {
+  intercept[NoSuchElementException] {
     empty.tail
   }
 
