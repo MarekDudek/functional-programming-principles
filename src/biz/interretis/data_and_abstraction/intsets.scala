@@ -6,13 +6,13 @@ abstract class IntSet {
 
   def contains(x: Int): Boolean
 
-  def makeString: String = null
+  def makeString: String
 }
 
-class Empty extends IntSet {
+object Empty extends IntSet {
 
   def incl(elem: Int): IntSet =
-    new NonEmpty(elem, new Empty, new Empty)
+    new NonEmpty(elem, Empty, Empty)
 
   def contains(elem: Int): Boolean =
     false
@@ -33,17 +33,17 @@ class NonEmpty(root: Int, left: IntSet, right: IntSet) extends IntSet {
   def contains(elem: Int): Boolean =
     if (root == elem)
       true
-    else if (elem < root)
+    else if (root > elem)
       left contains elem
     else
       right contains elem
 
   override def toString = {
     val builder = new StringBuilder
-    if (!left.isInstanceOf[Empty])
+    if (left != Empty)
       builder append left.toString append ", "
     builder append root
-    if (!right.isInstanceOf[Empty])
+    if (right != Empty)
       builder append right.toString append ", "
     builder toString
   }

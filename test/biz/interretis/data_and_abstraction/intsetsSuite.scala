@@ -7,20 +7,22 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class intsetsSuite extends FunSuite {
 
-  val empty = new Empty
-  val numbers = empty.incl(5).incl(3)
+  val empty = Empty
+  val singletonSet = empty.incl(5)
+  val set = singletonSet.incl(3)
 
   test("empty does not contain anything") {
-    assert(!(empty contains 1))
+    assert(!(empty contains 5))
   }
 
   test("non empty set contains some elements") {
-    assert(numbers contains 3)
-    assert(!(numbers contains 4))
+    assert(set contains 3)
+    assert(!(set contains 4))
   }
 
   test("sets have string representation") {
-    assert(numbers.makeString == "{3, 5}")
     assert(empty.makeString == "{}")
+    assert(singletonSet.makeString == "{5}")
+    assert(set.makeString == "{3, 5}")
   }
 }
