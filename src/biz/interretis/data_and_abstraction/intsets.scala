@@ -41,16 +41,16 @@ class NonEmpty(root: Int, left: IntSet, right: IntSet) extends IntSet {
   override def toString = {
     val builder = new StringBuilder
     if (left != Empty)
-      builder append left.toString append ", "
+      builder append left append ", "
     builder append root
     if (right != Empty)
-      builder append right.toString append ", "
+      builder append right append ", "
     builder toString
   }
 
   override def makeString = {
     val builder = new StringBuilder
-    builder append '{' append toString append '}'
+    builder append '{' append this append '}'
     builder toString
   }
 }
