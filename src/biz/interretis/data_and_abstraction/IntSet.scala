@@ -2,7 +2,7 @@ package biz.interretis.data_and_abstraction
 
 import scala.language.postfixOps
 
-abstract class IntSet {
+trait IntSet {
 
   def incl(x: Int): IntSet
 
