@@ -1,6 +1,7 @@
 package biz.interretis.data_and_abstraction
 
 import java.util.NoSuchElementException
+import scala.annotation.tailrec
 
 trait List[T] {
   def isEmpty: Boolean
@@ -19,5 +20,16 @@ class Cons[T](val head: T, val tail: List[T]) extends List[T] {
 }
 
 object List {
-    def singleton[T](elem: T) = new Cons[T](elem, new Nil[T])
+
+  def singleton[T](elem: T) =
+    new Cons[T](elem, new Nil[T])
+
+  @tailrec
+  def nth[T](n: Int, xs: List[T]): T =
+    if (n < 0 || xs.isEmpty)
+      throw new IndexOutOfBoundsException
+    else if (n == 0)
+      xs.head
+    else
+      nth(n - 1, xs.tail)
 }
