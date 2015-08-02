@@ -28,6 +28,8 @@ class NatSuite extends FunSuite {
   test("addition") {
     assert(Zero + one === one)
     assert(Zero + two === two)
+    assert(one + Zero === one)
+    assert(two + Zero === two)
     assert(one + two === three)
     assert(two + three === five)
   }
