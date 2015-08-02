@@ -40,4 +40,14 @@ class intsetsSuite extends FunSuite {
   test("union of sets") {
     assert((one union two).makeString === sum.makeString)
   }
+
+  test("filter") {
+    val even = sum.filter(x => x % 2 == 0)
+    assert(even.makeString == two.makeString)
+  }
+
+  test("assert all positive") {
+    assert(IntSet.assertAllPos(empty) === empty);
+    assert(IntSet.assertAllPos(set) === set);
+  }
 }
