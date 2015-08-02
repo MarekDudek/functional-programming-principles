@@ -14,9 +14,19 @@ object Zero extends Nat {
   def isZero = true
   def predecessor: Nat = throw new NoSuchElementException("0.predecessor")
   def +(that: Nat) = that
+  override def equals(o: Any) = {
+    val other = o.asInstanceOf[Nat]
+    if (other.isZero) true else false
+  }
 }
 
 class Succ(val predecessor: Nat) extends Nat {
   def isZero = false
-  def +(that: Nat) = successor + that.predecessor
+  def +(that: Nat) = new Succ(predecessor + that)
+
+  override def equals(o: Any) = {
+    val other = o.asInstanceOf[Nat]
+    if (other.isZero) false
+    else predecessor.equals(other.predecessor)
+  }
 }

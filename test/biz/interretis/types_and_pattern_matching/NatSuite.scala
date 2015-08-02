@@ -9,6 +9,9 @@ class NatSuite extends FunSuite {
 
   val one = new Succ(Zero)
   val two = new Succ(one)
+  val three = new Succ(two)
+  val four = new Succ(three)
+  val five = new Succ(four)
 
   test("predecessor") {
     assert(one.predecessor === Zero)
@@ -16,6 +19,7 @@ class NatSuite extends FunSuite {
   }
 
   test("successor") {
+    assert(Zero.successor.predecessor === Zero)
     assert(Zero.successor.successor.predecessor.predecessor === Zero)
     assert(one.successor.predecessor === one)
     assert(one.successor.successor.predecessor.predecessor === one)
@@ -24,12 +28,17 @@ class NatSuite extends FunSuite {
   test("addition") {
     assert(Zero + one === one)
     assert(Zero + two === two)
+    assert(one + two === three)
+    assert(two + three === five)
   }
 
   test("subtraction") {
     assert(Zero - Zero === Zero)
     assert(one - Zero === one)
     assert(two - Zero === two)
+    assert(one - one === Zero)
+    assert(two - one === one)
+    assert(five - two === three)
   }
 
   intercept[NoSuchElementException] {
