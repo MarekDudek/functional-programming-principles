@@ -32,4 +32,11 @@ object List {
       xs.head
     else
       nth(n - 1, xs.tail)
+
+  def apply[T](): List[T] =
+    new Nil
+
+  def apply[T](x1: T, x2: T): List[T] =
+    new Cons(x1, new Cons(x2, new Nil))
+
 }

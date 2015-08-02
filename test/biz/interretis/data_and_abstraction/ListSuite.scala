@@ -50,4 +50,10 @@ class ListSuite extends FunSuite {
   intercept[IndexOutOfBoundsException] {
     List.nth(0, empty);
   }
+
+  test("list constructor") {
+    val list = List(1, 2)
+    assert(list.head === 1)
+    assert(list.tail.head === 2)
+  }
 }
