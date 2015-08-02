@@ -9,9 +9,9 @@ import scala.language.postfixOps
 @RunWith(classOf[JUnitRunner])
 class ListSuite extends FunSuite {
 
-  val empty = new Nil[Int]
+  val empty = Nil
   val singletonList = List.singleton(1)
-  val list = new Cons(1, new Cons(2, new Cons(3, new Nil)))
+  val list = new Cons(1, new Cons(2, new Cons(3, Nil)))
 
   test("list can be checked for empty") {
     assert(empty isEmpty)

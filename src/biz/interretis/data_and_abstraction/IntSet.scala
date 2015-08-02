@@ -15,10 +15,10 @@ trait IntSet {
   def filter(p: Int => Boolean): IntSet
 }
 
-object Empty extends IntSet {
+class Empty extends IntSet {
 
   def incl(elem: Int): NonEmpty =
-    new NonEmpty(elem, Empty, Empty)
+    new NonEmpty(elem, new Empty, new Empty)
 
   def contains(elem: Int): Boolean =
     false
@@ -52,19 +52,18 @@ class NonEmpty(root: Int, left: IntSet, right: IntSet) extends IntSet {
   def union(other: IntSet) =
     left union right union other incl root
 
-  def filter(p: Int => Boolean) = {
+  def filter(p: Int => Boolean) =
     if (p(root))
       left.filter(p) union right.filter(p) incl (root)
     else
       left.filter(p) union right.filter(p)
-  }
 
   override def toString = {
     val builder = new StringBuilder
-    if (left != Empty)
+    if (!left.isInstanceOf[Empty])
       builder append left append ", "
     builder append root
-    if (right != Empty)
+    if (!right.isInstanceOf[Empty])
       builder append ", " append right
     builder toString
   }
@@ -79,10 +78,22 @@ class NonEmpty(root: Int, left: IntSet, right: IntSet) extends IntSet {
 object IntSet {
 
   def assertAllPos[S <: IntSet](set: S): S =
-    if (set == Empty) set
+    if (set.isInstanceOf[Empty]) set
     else {
       val positive = set.filter(x => x > 0)
       if (set.makeString == positive.makeString) set
       else throw new Error("Not positive")
     }
+
+  type A = IntSet => NonEmpty
+  type B = NonEmpty => IntSet
+
+  def a(s: IntSet) = new NonEmpty(1, new Empty, new Empty)
+  def b(s: NonEmpty) = new Empty
+
+  val aa: A = a
+  val bb: B = b
+
+  val cc: B = aa
+  //val dd: A = bb
 }
