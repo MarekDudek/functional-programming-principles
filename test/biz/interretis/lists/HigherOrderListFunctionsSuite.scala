@@ -55,4 +55,18 @@ class HigherOrderListFunctionsSuite extends FunSuite {
     val encoded = encode(unpacked)
     assert(encoded === List(("a", 3), ("b", 2), ("c", 2), ("a", 1)))
   }
+
+  test("reduceLeft") {
+    val sum1 = numbers.reduceLeft((x: Double, y: Double) => x + y)
+    val sum2 = numbers.reduceLeft((x, y) => x + y)
+    val sum3 = numbers.reduceLeft(_ + _)
+
+    assert(sum1 === sum2)
+    assert(sum2 === sum3)
+  }
+
+  test("foldLeft") {
+    val sum1 = numbers.foldLeft(0.0 )((x: Double, y: Double) => x + y)
+    assert(sum1 === 8.5)
+  }
 }
